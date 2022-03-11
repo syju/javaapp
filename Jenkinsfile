@@ -70,7 +70,7 @@ pipeline {
 		stage("deploy to appserver"){
             steps{
 		       sshagent(['deploy_key']) {
-			     sh  "scp -o StrictHostKeyChecking=no /home/jenkins-slave-01/workspace/today_ind_pipeline/target/simple-app-3.0.0-SNAPSHOT.war ec2-user@12.0.1.155:/usr/share/tomcat/webapps"
+			     sh  "scp -o StrictHostKeyChecking=no /home/jenkins-slave-01/workspace/final_pipeline_test2/target/simple-app-3.0.0-SNAPSHOT.war ec2-user@12.0.1.155:/usr/share/tomcat/webapps"
                  }
 	        }
 		}
