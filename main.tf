@@ -9,6 +9,7 @@ resource "aws_instance" "myFirstInstance" {
   instance_type = var.instance_type
   subnet_id     = var.subnet_id
   security_groups = ["${var.security_groups}"]
+  count = 1
   tags= {
     Name = var.tag_name
   }
