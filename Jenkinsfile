@@ -79,5 +79,11 @@ pipeline {
                 
             }
         }
+
+        stage("Ansible Deployment"){
+            steps{
+                sh "ansible-playbook install.yml -i aws_ec2.yml --private-key=sessionkey.pem --become"
+            }
+        }
     }
 }
