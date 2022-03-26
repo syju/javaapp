@@ -27,3 +27,8 @@ variable "ami_id" {
   description = "AMI for Ubuntu Ec2 instance"
   default     = "ami-00ee4df451840fa9d"
 }
+
+variable "subnet_id" {
+  description = "vpc security group"
+  default     = "subnet-06faf682a0bb63ec3"
+}
