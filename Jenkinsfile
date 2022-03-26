@@ -57,7 +57,7 @@ pipeline {
                 ], 
                 credentialsId: 'nexus-credentials', 
                 groupId: 'in.javahome', 
-                nexusUrl: '54.203.140.241:8081', 
+                nexusUrl: '18.236.148.16:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'maven-nexus-repo', 
