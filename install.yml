@@ -12,13 +12,13 @@
         state: latest
     - name: download pkg
       get_url:
-         url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.18/bin/apache-"{{ tomcat-10.0.18 }}.tar.gz"
+         url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.18/bin/apache-tomcat-10.0.18.tar.gz
          dest: /usr/local
          validate_certs: no
     - name: extracting tomcat file
       unarchive:
-         src: /usr/local/apache-tomcat-"{{ tomcat-10.0.18 }}.tar.gz"
+         src: /usr/local/apache-tomcat-10.0.18.tar.gz
          dest: /usr/local
          remote_src: yes
     - name: start tomcat service
-      shell: nohup /usr/local/apache-"{{ tomcat-10.0.18 }}/bin/startup.sh"
+      shell: nohup /usr/local/apache-tomcat-10.0.18/bin/startup.sh
