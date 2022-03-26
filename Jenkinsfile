@@ -75,14 +75,14 @@ pipeline {
         
         stage("terraform apply"){
             steps{
-                sh label: '', script: 'terraform  apply  --auto-approve'
+                sh label: '', script: 'terraform  destroy  --auto-approve'
                 
             }
         }
 
         stage("Ansible Deployment"){
             steps{
-                sh "ansible-playbook install.yml -i aws_ec2.yml --private-key=sessionkey.pem --become"
+                sh "ansible-playbook install.yml -i aws_ec2.yml --private-key=sessionkey.pem --become-user root"
             }
         }
     }
