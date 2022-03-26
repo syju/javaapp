@@ -39,6 +39,7 @@ resource "aws_instance" "myFirstInstance" {
   ami           = var.ami_id
   key_name = var.key_name
   instance_type = var.instance_type
+  subnet_id     = "subnet-06faf682a0bb63ec3"
   security_groups= [var.security_group]
   tags= {
     Name = var.tag_name
