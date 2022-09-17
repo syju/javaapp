@@ -12,17 +12,18 @@
         state: latest
     - name: download pkg
       get_url:
-         url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.18/bin/apache-tomcat-10.0.18.tar.gz
+         url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.23/bin/apache-tomcat-10.0.23.tar.gz
          dest: /usr/local
-         validate_certs: no
+         mode: 0755
+         validate_certs: false
     - name: extracting tomcat file
       unarchive:
-         src: /usr/local/apache-tomcat-10.0.18.tar.gz
+         src: /usr/local/apache-tomcat-10.0.23.tar.gz
          dest: /usr/local
          remote_src: yes
     - name: copy the war file
       copy:
-         src: /home/jenkins-slave-01/workspace/ch-5/target/simple-app-3.0.0-SNAPSHOT.war
-         dest: /usr/local/apache-tomcat-10.0.18/webapps
+         src: /home/jenkins-slave/workspace/final-pipline-1/target/simple-app-3.0.0-SNAPSHOT.war
+         dest: /usr/local/apache-tomcat-10.0.23/webapps
     - name: start tomcat service
-      shell: nohup /usr/local/apache-tomcat-10.0.18/bin/startup.sh
+      shell: nohup /usr/local/apache-tomcat-10.0.23/bin/startup.sh
