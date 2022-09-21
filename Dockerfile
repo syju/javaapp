@@ -16,7 +16,7 @@ ADD tomcat-users.xml /opt/tomcat/conf/tomcat-users.xml
 ADD manager/context.xml /opt/tomcat/webapps/manager/META-INF/context.xml
 ADD host-manager/context.xml /opt/tomcat/webapps/host-manger/META-INF/context.xml
 ADD SampleWebApp.war /opt/tomcat/webapps/SampleWebApp.war
-COPY --from=slave01 /home/jenkins-slave/workspace/docker-pipe-1/target/simple-app-3.0.0-SNAPSHOT.war /opt/tomcat/webapps/simple-app-3.0.0-SNAPSHOT.war
+COPY  /home/jenkins-slave/workspace/docker-pipe-1/target/simple-app-3.0.0-SNAPSHOT.war /opt/tomcat/webapps/simple-app-3.0.0-SNAPSHOT.war
 
 EXPOSE 8080
 
