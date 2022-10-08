@@ -15,6 +15,6 @@ RUN rm -rf /opt/tomcat/conf/tomcat-users.xml
 ADD tomcat-users.xml /opt/tomcat/conf/tomcat-users.xml
 ADD manager/context.xml /opt/tomcat/webapps/manager/META-INF/context.xml
 ADD host-manager/context.xml /opt/tomcat/webapps/host-manger/META-INF/context.xml
-COPY  /home/jenkins-slave/workspace/docker-pipe-1/target/simple-app-3.0.0-SNAPSHOT.war /opt/tomcat/webapps/simple-app-3.0.0-SNAPSHOT.war
+COPY  simple-app-3.0.0-SNAPSHOT.war  /opt/tomcat/webapps/simple-app-3.0.0-SNAPSHOT.war
 EXPOSE 8080
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]
