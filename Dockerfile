@@ -6,9 +6,9 @@ RUN yum -y install wget && \
 
 WORKDIR /opt/tomcat
 
-RUN wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.tar.gz --no-check-certificate
-RUN tar -xvzf apache-tomcat-10.0.27.tar.gz
-RUN mv apache-tomcat-10.0.27/* /opt/tomcat/.
+RUN wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.5/bin/apache-tomcat-10.1.5.tar.gz --no-check-certificate
+RUN tar -xvzf apache-tomcat-10.1.5.tar.gz
+RUN mv apache-tomcat-10.1.5/* /opt/tomcat/.
 RUN yum -y install java-11-openjdk
 RUN java -version
 RUN rm -rf /opt/tomcat/conf/tomcat-users.xml
