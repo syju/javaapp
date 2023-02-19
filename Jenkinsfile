@@ -1,10 +1,15 @@
 pipeline {
+environment {
+registry = "matt96/tomimg"
+registryCredential = 'dockerhub-cred'
+dockerImage = ''
+}    
 
-    agent any
+    agent {label 'slave01'}
 
     tools {
         // Note: this should match with the tool name configured in your jenkins instance (JENKINS_URL/configureTools/)
-        maven "Maven 3.8.4"
+        maven "maven-4.0.0"
     }
 
     
@@ -17,18 +22,6 @@ pipeline {
                 }
             }
         }
-
-        stage("mvn build") {
-            steps {
-                script {
-                    // If you are using Windows then you should use "bat" step
-                    // Since unit testing is out of the scope we skip them
-                    sh script: 'mvn clean package'
-                    archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
-                }
-            }
-        }
-        
         stage('SonarQube analysis') {
     //  def scannerHome = tool 'SonarScanner 4.0';
              steps {
@@ -41,7 +34,20 @@ pipeline {
             }
 
         }
-        
+        stage("mvn build") {
+            steps {
+                script {
+                    // If you are using Windows then you should use "bat" step
+                    // Since unit testing is out of the scope we skip them
+                    sh script: 'mvn clean package'
+                    archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
+                    sh script: 'cp /home/jenkins-slave/workspace/fita-job1/target/simple-app-3.0.0-SNAPSHOT.war /home/jenkins-slave/workspace/fita-job1'
+                }
+            }
+        }
+
+     
+
         stage("publish to nexus") {
             steps {
               script{
@@ -55,9 +61,9 @@ pipeline {
                         type: 'war'
                     ]
                 ], 
-                credentialsId: 'nexus-credentials', 
+                credentialsId: 'nexus-pass', 
                 groupId: 'in.javahome', 
-                nexusUrl: '18.236.148.16:8081', 
+                nexusUrl: '18.236.222.213:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'maven-nexus-repo', 
@@ -66,24 +72,31 @@ pipeline {
                 }
                     
             }
-        }
-		stage("terraform init"){
-            steps{
-               sh label: '', script: 'terraform init'
-               }
-            }
-        
-        stage("terraform apply"){
-            steps{
-                sh label: '', script: 'terraform  destroy --auto-approve'
+        }    
+            stage('Build image') {
                 
+              steps{
+                script {
+                    sh 'docker build -t tomv1:latest /home/jenkins-slave/workspace/fita-job1'
+                    sh 'docker tag tomv1:latest 545283343502.dkr.ecr.us-west-2.amazonaws.com/stackimgs:latest' 
+                }
             }
         }
-
-        stage("Ansible Deployment"){
+        stage('Pushing image') {
+               
             steps{
-                ansiblePlaybook credentialsId: 'deploy_key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'aws_ec2.yml', playbook: 'install.yml'
+                script {
+                sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 545283343502.dkr.ecr.us-west-2.amazonaws.com"
+                sh "docker push 545283343502.dkr.ecr.us-west-2.amazonaws.com/stackimgs:latest"
+                }
             }
         }
-    }
-}
+        stage ("k8s-Deploy"){
+            steps{
+                script {
+                   kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "k8s")
+                }
+            }
+        }
+    }    
+}  
