@@ -1,6 +1,6 @@
 pipeline {
 environment {
-registry = "matt96/tomimg"
+registry = ""
 registryCredential = 'dockerhub-cred'
 dockerImage = ''
 }    
