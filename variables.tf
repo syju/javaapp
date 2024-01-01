@@ -5,7 +5,7 @@ variable "aws_region" {
 
 variable "key_name" {
   description = " SSH keys to connect to ec2 instance"
-  default     =  "devops_test_key"
+  default     =  "vtkey"
 }
 
 variable "instance_type" {
@@ -15,7 +15,7 @@ variable "instance_type" {
 
 variable "security_groups" {
   description = "Name of security group"
-  default     = "sg-0a575a5287e9325eb"
+  default     = "sg-092e4bd6d90564b7d"
 }
 
 variable "tag_name" {
@@ -25,10 +25,10 @@ variable "tag_name" {
 
 variable "ami_id" {
   description = "AMI for Ubuntu Ec2 instance"
-  default     = "ami-07d59d159373b8030"
+  default     = "ami-0de43e61758b7158c"
 }
 
 variable "subnet_id" {
   description = "vpc security group"
-  default     = "subnet-061b09fcc31bf7201"
+  default     = "subnet-0873340a5e525b481"
 }
