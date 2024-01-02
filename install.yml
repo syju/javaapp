@@ -23,7 +23,7 @@
          remote_src: yes
     - name: copy the war file
       copy:
-         src: /home/jenkins-slave/workspace/Test-build-6/target/simple-app-3.0.0-SNAPSHOT.war
+         src: /home/jenkins-slave/workspace/Test-build-7/target/simple-app-3.0.0-SNAPSHOT.war
          dest: /usr/local/apache-tomcat-10.1.17/webapps
     - name: start tomcat service
       shell: nohup /usr/local/apache-tomcat-10.1.17/bin/startup.sh
