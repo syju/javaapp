@@ -4,7 +4,7 @@
   gather_facts: yes
   become: yes
   vars:
-    - version: tomcat-10.0.18
+    - version: tomcat-10.1.17
   tasks:
     - name: install java
       yum:
