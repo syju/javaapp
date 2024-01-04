@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: nodeserver
-        image: 545283343502.dkr.ecr.us-west-2.amazonaws.com/web-repository:latest
+        image: 111249026938.dkr.ecr.us-west-2.amazonaws.com/devopsrepo01:latest
         ports:
         - containerPort: 3000
 
